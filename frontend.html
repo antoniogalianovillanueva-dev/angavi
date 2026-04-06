@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>ANGAVI IA</h2>
+
+<input id="c" placeholder="Cantidad"><br>
+<input id="m" placeholder="Maximo"><br>
+<textarea id="s"></textarea><br>
+
+<button onclick="go()">Analizar</button>
+<pre id="r"></pre>
+
+<script>
+async function go(){
+let c=parseInt(document.getElementById("c").value);
+let m=parseInt(document.getElementById("m").value);
+let s=document.getElementById("s").value.split("\\n").map(l=>l.split(",").map(Number));
+
+let res=await fetch("https://TU_BACKEND.onrender.com/analizar",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
+});
+
+let d=await res.json();
+document.getElementById("r").textContent=JSON.stringify(d,null,2);
+}
+</script>
+</body>
+</html>
