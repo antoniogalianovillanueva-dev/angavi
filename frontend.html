@@ -16,7 +16,7 @@ let c=parseInt(document.getElementById("c").value);
 let m=parseInt(document.getElementById("m").value);
 let s=document.getElementById("s").value.split("\\n").map(l=>l.split(",").map(Number));
 
-let res=await fetch("https://TU_BACKEND.onrender.com/analizar",{
+let res=await fetch("https://angavi-backend.onrender.com",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
