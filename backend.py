@@ -16,16 +16,7 @@ def frecuencias(seqs, maximo):
             f[n]+=1
     return f
 
-def generar(inicio, cantidad, maximo, freq):
-    nums = list(range(1,maximo+1))
-    nums.remove(inicio)
-    res=[inicio]
-    while len(res)<cantidad:
-        nums_sorted = sorted(nums, key=lambda x: -freq[x])
-        choice = nums_sorted[0]
-        res.append(choice)
-        nums.remove(choice)
-    return res
+
 
 @app.post("/analizar")
 def analizar(data: InputData):
@@ -34,6 +25,23 @@ def analizar(data: InputData):
     for i in range(1,data.maximo+1):
         seq = generar(i,data.cantidad,data.maximo,f)
         prob = sum(f[n] for n in seq)
-        resultados.append({"inicio":i,"secuencia":seq,"prob":prob})
+        resultdef generar(inicio, cantidad, maximo, freq):
+    nums = list(range(1,maximo+1))
+    nums.remove(inicio)
+    res=[inicio]
+
+    while len(res)<cantidad:
+        nums_sorted = sorted(nums, key=lambda x: -freq[x])
+        
+        # mezcla inteligencia + exploración
+        if random.random() < 0.7:
+            choice = nums_sorted[0]
+        else:
+            choice = random.choice(nums)
+
+        res.append(choice)
+        nums.remove(choice)
+
+    return resados.append({"inicio":i,"secuencia":seq,"prob":prob})
     resultados.sort(key=lambda x: x["prob"], reverse=True)
     return resultados
