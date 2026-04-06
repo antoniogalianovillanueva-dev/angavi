@@ -19,7 +19,7 @@ def frecuencias(seqs, maximo):
 
 
 @app.post("/analizar")
-def analizar(data: InputData):
+def analizar(guardar_datos(data)):
     f = frecuencias(data.secuencias, data.maximo)
     resultados=[]
     for i in range(1,data.maximo+1):
@@ -43,5 +43,12 @@ def analizar(data: InputData):
         nums.remove(choice)
 
     return resados.append({"inicio":i,"secuencia":seq,"prob":prob})
-    resultados.sort(key=lambda x: x["prob"], reverse=True)
+    
+    reimport json
+
+def guardar_datos(data):
+    with open("datos.json","a") as f:
+        f.write(json.dumps(data.dict())+"\\n")sultados.sort(key=lambda x: x["prob"], reverse=True)
     return resultados
+    
+    
