@@ -32,6 +32,29 @@ body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
 
 let d=await res.json();
 document.getElementById("r").textContent=JSON.stringify(d,null,2);
+
+dibujarGrafica(d);    
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<canvas id="grafica"></canvas>
+
+<script>
+function dibujarGrafica(data){
+    let valores = data.map(d => d.prob);
+    let labels = data.map(d => "Inicio " + d.inicio);
+
+    new Chart(document.getElementById("grafica"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Probabilidad",
+                data: valores
+            }]
+        }
+    });
 }
 </script>
 </body>
