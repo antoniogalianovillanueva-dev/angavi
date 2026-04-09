@@ -31,7 +31,17 @@ body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
 });
 
 let d=await res.json();
-document.getElementById("r").textContent=JSON.stringify(d,null,2);
+let salida = "";
+
+d.forEach(item => {
+    salida += "Inicio: " + item.inicio + "\\n";
+    salida += "Secuencia: " + item.secuencia.join(", ") + "\\n";
+    salida += "Probabilidad: " + item.prob + "\\n";
+    salida += "Explicación: " + item.explicacion + "\\n";
+    salida += "----------------------\\n";
+});
+
+document.getElementById("r").textContent = salida;
 
 dibujarGrafica(d);    
 }
