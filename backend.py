@@ -11,9 +11,23 @@ class InputData(BaseModel):
 
 def frecuencias(seqs, maximo):
     f = [0]*(maximo+1)
+
+    # datos actuales
     for s in seqs:
         for n in s:
             f[n]+=1
+
+    # datos históricos (aprendizaje)
+    try:
+        with open("datos.json","r") as file:
+            for line in file:
+                data = eval(line)
+                for s in data["secuencias"]:
+                    for n in s:
+                        f[n]+=1
+    except:
+        pass
+
     return f
 
 
