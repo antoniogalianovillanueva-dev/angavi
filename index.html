@@ -29,7 +29,7 @@ async function go(){
 
         console.log("Datos enviados:", {c, m, s});
 
-        let res = await fetch("https://xxxxxxxx.onrender.com/analizar",{
+        let res = await fetch("https://angavi-backend.onrender.com/analizar",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
