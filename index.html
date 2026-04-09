@@ -20,30 +20,45 @@ if(user !== "ANGAVI2015@" || pass !== "@2015ANGAVI3499@"){
 
 <script>
 async function go(){
-let c=parseInt(document.getElementById("c").value);
-let m=parseInt(document.getElementById("m").value);
-let s=document.getElementById("s").value.split("\\n").map(l=>l.split(",").map(Number));
+    try {
+        let c = parseInt(document.getElementById("c").value);
+        let m = parseInt(document.getElementById("m").value);
+        let s = document.getElementById("s").value
+            .split("\\n")
+            .map(l => l.split(",").map(Number));
 
-let res=await fetch("https://angavi-backend.onrender.com",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
-});
+        console.log("Datos enviados:", {c, m, s});
 
-let d=await res.json();
-let salida = "";
+        let res = await fetch("https://xxxxxxxx.onrender.com/analizar",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({cantidad:c,maximo:m,secuencias:s})
+        });
 
-d.forEach(item => {
-    salida += "Inicio: " + item.inicio + "\\n";
-    salida += "Secuencia: " + item.secuencia.join(", ") + "\\n";
-    salida += "Probabilidad: " + item.prob + "\\n";
-    salida += "Explicación: " + item.explicacion + "\\n";
-    salida += "----------------------\\n";
-});
+        let d = await res.json();
 
-document.getElementById("r").textContent = salida;
+        console.log("Respuesta:", d);
 
-dibujarGrafica(d);    
+        let salida = "";
+
+        d.forEach(item => {
+            salida += "Inicio: " + item.inicio + "\\n";
+            salida += "Secuencia: " + item.secuencia.join(", ") + "\\n";
+            salida += "Probabilidad: " + item.prob + "\\n";
+            salida += "Explicación: " + item.explicacion + "\\n";
+            salida += "----------------------\\n";
+        });
+
+        document.getElementById("r").textContent = salida;
+
+        if (typeof dibujarGrafica === "function") {
+            dibujarGrafica(d);
+        }
+
+    } catch(error) {
+        console.error(error);
+        document.getElementById("r").textContent = "ERROR: " + error;
+    }
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
