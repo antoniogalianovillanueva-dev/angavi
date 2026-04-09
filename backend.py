@@ -42,13 +42,24 @@ def analizar(guardar_datos(data)):
         res.append(choice)
         nums.remove(choice)
 
-    return resados.append({"inicio":i,"secuencia":seq,"prob":prob})
+    resultados.append({
+    "inicio":i,
+    "secuencia":seq,
+    "prob":prob,
+    "explicacion": explicar_secuencia(seq, f)
+})
     
     reimport json
 
 def guardar_datos(data):
     with open("datos.json","a") as f:
         f.write(json.dumps(data.dict())+"\\n")sultados.sort(key=lambda x: x["prob"], reverse=True)
-    return resultados
+    return resultados 
+
+def explicar_secuencia(seq, freq):
+    explicacion = []
+    for n in seq:
+        explicacion.append(f"Número {n} tiene frecuencia {freq[n]}")
+    return " | ".join(explicacion)
     
     
