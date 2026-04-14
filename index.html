@@ -37,6 +37,15 @@ async function go(){
 
         let d = await res.json();
 
+        console.log("Respuesta backend:", d);
+
+        // Si no es array, lo convertimos
+        if (!Array.isArray(d)) {
+            document.getElementById("r").textContent =
+                "ERROR BACKEND:\n" + JSON.stringify(d, null, 2);
+            return;
+        }
+
         console.log("Respuesta:", d);
 
         let salida = "";
