@@ -25,7 +25,7 @@ async function go(){
         let m = parseInt(document.getElementById("m").value);
         let s = document.getElementById("s").value
             .split("\\n")
-            .map(l => l.split(",").map(Number));
+            .map(l => l.trim().split(/[\s,]+/).map(Number));
 
         console.log("Datos enviados:", {c, m, s});
 
