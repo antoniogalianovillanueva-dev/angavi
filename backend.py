@@ -63,4 +63,8 @@ def analizar(data: InputData):
         })
 
     resultados.sort(key=lambda x: x["prob"], reverse=True)
-    return resultados
+
+    # 🔥 seleccionar TOP (puedes cambiar el número)
+    top = max(1, int(len(resultados) * 0.3))  # 30% mejores
+
+    return resultados[:top]
