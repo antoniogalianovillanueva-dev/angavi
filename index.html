@@ -48,17 +48,10 @@ async function go(){
 
         console.log("Respuesta:", d);
 
-        let salida = "";
+        let salida = "MEJORES COMBINACIONES:\n\n";
 
-        d.forEach(item => {
-        salida += item.secuencia.join(" ") + ";\n";
-        });
-
-        document.getElementById("r").textContent = salida;
-            
-            salida += "Probabilidad: " + item.prob + "\\n";
-            salida += "Explicación: " + item.explicacion + "\\n";
-            salida += "----------------------\\n";
+        d.forEach((item, index) => {
+            salida += (index+1) + ") " + item.secuencia.join(" ") + ";\n";
         });
 
         document.getElementById("r").textContent = salida;
