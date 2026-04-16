@@ -52,10 +52,12 @@ async function go(){
 
         d.forEach(item => {
             salida += "Inicio: " + item.inicio + "\\n";
+            
             salida += "Secuencia:\\n";
             item.secuencia.forEach(n => {
                 salida += n + "\\n";
             });
+            
             salida += "Probabilidad: " + item.prob + "\\n";
             salida += "Explicación: " + item.explicacion + "\\n";
             salida += "----------------------\\n";
