@@ -62,4 +62,5 @@ def analizar(data: InputData):
             "explicacion": explicar_secuencia(seq, f)
         })
 
+    resultados.sort(key=lambda x: x["prob"], reverse=True)
     return resultados
