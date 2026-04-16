@@ -80,11 +80,19 @@ async function go(){
 <canvas id="grafica"></canvas>
 
 <script>
+let graficaActual = null;
+
 function dibujarGrafica(data){
+
     let valores = data.map(d => d.prob);
     let labels = data.map(d => "Inicio " + d.inicio);
 
-    new Chart(document.getElementById("grafica"), {
+    // 🔥 destruir gráfica anterior
+    if (graficaActual) {
+        graficaActual.destroy();
+    }
+
+    graficaActual = new Chart(document.getElementById("grafica"), {
         type: "bar",
         data: {
             labels: labels,
